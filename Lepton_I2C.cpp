@@ -1,8 +1,8 @@
 #include "Lepton_I2C.h"
 
-#include "leptonSDKEmb32PUB/LEPTON_SDK.h"
-#include "leptonSDKEmb32PUB/LEPTON_SYS.h"
-#include "leptonSDKEmb32PUB/LEPTON_Types.h"
+#include "LEPTON_SDK.h"
+#include "LEPTON_SYS.h"
+#include "LEPTON_Types.h"
 
 bool _connected;
 
