@@ -1,6 +1,6 @@
 CFLAGS        += -pipe -O2 -Wall -W -D_REENTRANT -lpthread -lLEPTON_SDK
 CXXFLAGS      += -pipe -O2 -Wall -W -D_REENTRANT -lpthread -lLEPTON_SDK
-INCPATH		  += -I.
+INCPATH       += -I.
 
 all: leptsci.o SPI.o Lepton_I2C.o Palettes.o lepton_v4l2_capture
 
@@ -14,7 +14,7 @@ Lepton_I2C.o:
 	${CXX} -c ${CXXFLAGS} ${INCPATH} -o Lepton_I2C.o Lepton_I2C.cpp
 
 lepton_v4l2_capture: lepton_v4l2_capture.o leptsci.o Palettes.o SPI.o
-	${CXX} -c ${CXXFLAGS} -o lepton_v4l2_capture leptsci.o Palettes.o SPI.o lepton_v4l2_capture.cpp
+	${CXX} -o lepton_v4l2_capture leptsci.o Palettes.o SPI.o lepton_v4l2_capture.cpp ${CXXFLAGS}
 
 leptsci.o: leptsci.c
 
