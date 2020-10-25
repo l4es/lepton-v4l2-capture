@@ -4,15 +4,17 @@ This is a simple program initially designed for target platform that reads frame
 
 Code is borrowed from raspberrypi_video as well as the ondemandcam example provided with v4l2loopback.
 
-Install v4l2loopback kernel module to a target platform:
-A. Buildroot
-Enable v4l2loopback package under :
-    Target packages --> 
-        Audio and video applications
-            [x] v4l2loopback
-            [x]   utils
+Install v4l2loopback kernel module to a target platform:  
 
-B. Manual installation
+A. Buildroot  
+1. Enable v4l2loopback package under :  
+    Target packages -->   
+        Audio and video applications  
+            [x] v4l2loopback  
+            [x]     utils  
+2. Then insert the v4l2loopback.ko module by using `sudo insmod /lib/modules/$(uname -r)/extra/v4l2loopback.ko`  
+
+B. Manual installation  
 1. Install kernel headers, for example with [rpi-source](https://github.com/RPi-Distro/rpi-source) utility on Raspberry Pi. Other platforms : TBD
 2. Compile [v4l2loopback](https://github.com/umlaeute/v4l2loopback)
 3. If step 2 is successful, you should have v4l2loopback.ko in the source directory
@@ -21,7 +23,7 @@ B. Manual installation
 
 At this point, you should be able to modprobe v4l2loopback. This will create a new /dev/video device. It will be /dev/video0 if you have no other cameras attached. If you have other cameras, it will likely be the highest numbered /dev/video. To be sure, you can pass options to modprobe that will set it to a specific number (see v4l2loopback docs). You could also identify the proper video device with `v4l2-ctl`. 
 
-Below, I refer to the new v4l2loopback device as `/dev/videoX` but you should replace X with the number on your system.
+Below, I refer to the new v4l2loopback device as `/dev/videoX` but you should replace X with the number on your system.  
 
 To compile lepton_v4l2_capture:
     
