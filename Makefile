@@ -1,6 +1,6 @@
-CFLAGS        += -pipe -O2 -Wall -W -D_REENTRANT -lpthread -lLEPTON_SDK
-CXXFLAGS      += -pipe -O2 -Wall -W -D_REENTRANT -lpthread -lLEPTON_SDK
-INCPATH       += -I.
+override CFLAGS += -pipe -O2 -Wall -W -D_REENTRANT -lpthread -lLEPTON_SDK
+override CXXFLAGS += -pipe -O2 -Wall -W -D_REENTRANT -lpthread -lLEPTON_SDK
+INCPATH += -I.
 
 all: leptsci.o SPI.o Lepton_I2C.o Palettes.o lepton_v4l2_capture
 
