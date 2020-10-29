@@ -22,22 +22,22 @@
 #include "SPI.h"
 #include "Lepton_I2C.h"
 
-#define PACKET_SIZE 164
-#define PACKET_SIZE_UINT16 (PACKET_SIZE/2)
-#define PACKETS_PER_FRAME 60
-#define FRAME_SIZE_UINT16 (PACKET_SIZE_UINT16*PACKETS_PER_FRAME)
-#define FPS 27;
+#define PACKET_SIZE 164 // 4-BYTE HEADER (ID + CRC) + 160-BYTE PAYLOAD
+#define PACKET_SIZE_UINT16 (PACKET_SIZE / 2)
+#define PACKETS_PER_FRAME 60 // RAW14, TELEMETRY DISABLED
+#define FRAME_SIZE_UINT16 (PACKET_SIZE_UINT16 * PACKETS_PER_FRAME)
+#define FPS 9;
 
 static char const *v4l2dev = "/dev/video1";
 static char *spidev = NULL;
 static int v4l2sink = -1;
-static int width = 80;                //640;    // Default for Flash
-static int height = 60;        //480;    // Default for Flash
+static int width = 160;
+static int height = 120;
 static char *vidsendbuf = NULL;
 static int vidsendsiz = 0;
 
 static int resets = 0;
-static uint8_t result[PACKET_SIZE*PACKETS_PER_FRAME];
+static uint8_t result[PACKET_SIZE * PACKETS_PER_FRAME];
 static uint16_t *frameBuffer;
 
 static void init_device() {
@@ -62,7 +62,7 @@ static void grab_frame() {
         }
     }
     if (resets >= 30) {
-        fprintf( stderr, "done reading, resets: \n" );
+        fprintf( stderr, "done reading, resets: %d\n", resets );
     }
 
     frameBuffer = (uint16_t *)result;
